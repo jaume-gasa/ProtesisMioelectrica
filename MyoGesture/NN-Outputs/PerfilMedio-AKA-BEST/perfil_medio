@@ -1,0 +1,10 @@
+             precision    recall  f1-score   support
+
+    class 0       0.57      0.66      0.61       334
+    class 1       0.80      0.64      0.71       333
+    class 2       0.55      0.63      0.59       334
+    class 3       0.61      0.54      0.58       333
+    class 4       0.65      0.46      0.54       333
+    class 5       0.55      0.73      0.63       333
+
+avg / total       0.62      0.61      0.61      2000

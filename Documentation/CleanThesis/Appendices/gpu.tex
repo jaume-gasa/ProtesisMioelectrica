@@ -1,0 +1,47 @@
+% Appendix Template
+
+\chapter{Cómo usar la GPU para entrenar una red neuronal en Archlinux} % Main appendix title
+\label{app:gpu}
+
+\begin{figure}[htp]
+  \centering
+    \includegraphics[width=0.8\textwidth]{ApendixGPU/arch-gpu}
+  \caption{Logos de Archlinux y NVIDIA}
+\label{fig:arch-gpu}
+\end{figure}
+
+Para utilizar la potencia de las tarjetas gráficas y acelerar el proceso de aprendizaje, el primer paso es comprobar
+que la tarjeta gráfica sea compatible con la tecnología CUDA (\url{https://developer.nvidia.com/cuda-gpus}).
+
+Sí la tarjeta gráfica es compatible y el sistema tiene instalado el \textit{kernel}, \textit{dirvers} y librerías
+\textit{runtime} propietarias de NVIDIA, el siguiente paso es instalar el \textit{toolkit} CUDA desde el repositorio AUR de Archlinux.
+
+Después de la instalación es necesario exportar los siguientes \textit{PATHS} usando la termianl:
+
+\begin{center}
+export PATH=\$PATH:/opt/cuda/bin \\
+export LD\_LIBRARY\_PATH=/opt/cuda/lib64
+\end{center}
+
+Para asegurar que todo funciona correctamente, es posible hacer una prueba llamando a \textit{nvcc} desdde la terminal, por ejemplo:
+
+\begin{center}
+	nvcc --version
+\end{center}
+
+Si la llamada anterior produce un error, reinstala el paquete \textit{nvidia} y reinicia el sistema. Si no ha 
+causado ningún error, crea en tu \textit{home} el archivo mostrado en \ref{theanorc} con el nombre 
+\textit{.theanorc}. Este fichero permitirá la ejecución automática, cuando sea posible, de la GPU en lugar de
+utilizar la CPU. El modelo de tarjeta gráfica determinará cuántas veces es más rápido el proceso de entrenamiento/
+aprendizaje.
+
+
+\begin{python}[frame=none, numbers=left, label={theanorc},  caption={Fichero .theanorc}]
+[global]
+device = gpu
+floatX = float32
+
+[cuda]
+root = /opt/cuda
+\end{python}
+

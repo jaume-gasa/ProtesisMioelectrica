@@ -1,0 +1,223 @@
+% Version 2.x major modifications by:
+% Vel (vel@latextemplates.com)
+%
+% This template is based on a template by:
+% Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
+% Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
+%
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%   PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+11pt, % The default document font size, options: 10pt, 11pt, 12pt
+%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+spanish, % ngerman for German
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage{palatino} % Use the Palatino font by default
+
+% https://tex.stackexchange.com/questions/13509/biblatex-in-a-nutshell-for-beginners#13513
+\usepackage[backend=biber,style=numeric-comp,sorting=none,citestyle=numeric,natbib=true]{biblatex} % User the bibtex backend with the authoryear citation style (which resembles APA)
+
+\addbibresource{bib.bib} % The filename of the bibliography
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+
+
+\usepackage{eurosym} % Required to use € simbols
+\usepackage{pdflscape} % Required to rotate pages
+\usepackage{pdfpages}
+
+% Required for making the introductions to the chapters
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\newcommand{\chapquote}[1]{\begin{quotation} \textit{#1} \end{quotation}}
+
+%% Required for include code
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\usepackage[dvipsnames]{xcolor} % for default colors
+\usepackage{color} % custom
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{dark-gray}{gray}{0.25}
+
+\usepackage{listings}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm\small\color{dark-gray},
+otherkeywords={self, =, +, False, True, target, args},             % Add keywords here
+keywordstyle=\ttb\small\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\small\color{deepred},    % Custom highlighting style
+stringstyle=\small\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            %
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
+\usepackage{subcaption}
+
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows}
+
+
+%%
+%----------------------------------------------------------------------------------------
+%   MARGIN SETTINGS
+%----------------------------------------------------------------------------------------
+
+\geometry{
+    paper=a4paper, % Change to letterpaper for US letter
+    inner=2.5cm, % Inner margin
+    outer=3.8cm, % Outer margin
+    bindingoffset=2cm, % Binding offset
+    top=1.5cm, % Top margin
+    bottom=1.5cm, % Bottom margin
+    %showframe,% show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%   THESIS INFORMATION
+%----------------------------------------------------------------------------------------
+
+\thesistitle{Desarrollo de prótesis robóticas mediante sistemas empotrados y tecnologías de impresión 3D} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\supervisor{Diego Viejo Hernando} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
+\degree{Grado en Ingeniería Informática} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\author{Jaume Gasa Gómez} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
+
+\subject{Biological Sciences} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{Impresión 3D, Machine Learning, Deep Learning, Sistemas Empotrados} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\university{\href{http://www.ua.es}{Universidad de Alicante}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\department{\href{http://web.ua.es/dccia/}{Departamento de Ciencia de la Computación e Inteligencia Artificial}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+%\group{\href{http://researchgroup.university.com}{Departamento de Ciencia de la Computación e Inteligencia Artificial}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\faculty{\href{http://eps.ua.es}{Escuela Politécnica Superior de Alicante}} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
+
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+
+\begin{document}
+
+\includepdf[pages=-]{portada.pdf}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+
+%----------------------------------------------------------------------------------------
+%   ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+
+En este proyecto, se propone realizar una prótesis de miembro superior utilizando técnicas de impresión 3D y sistemas empotrados. Para el control de esta prótesis, se ha desarrollado una red neuronal
+artificial, que clasificará las señales leídas mediante ocho sensores mioeléctricos. Mediante este proceso de clasificación se podrá controlar el movimiento de los dedos de la prótesis mediante el uso de
+Arduino y un controlador de motores. El proceso de obtención de señales se realizará usando la Myo Armband, que está equipada con ocho sensores EMG, a su vez, para identificar qué longitud corresponde a
+cada señal EMG, se utilizará la librería para visión artificial OpenCV con la que se podrá asociar señales EMG a distintas etiquetas que representará cómo de estirado se encuentra el dedo para cada una
+de las señales EMG.
+
+
+\end{abstract}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Prints the main table of contents
+
+\listoffigures % Prints the list of figures
+
+\listoftables % Prints the list of tables
+
+\lstlistoflistings
+
+
+
+%----------------------------------------------------------------------------------------
+%   THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+
+
+\include{Chapters/Chapter1}
+\include{Chapters/Chapter2}
+\include{Chapters/Chapter3}
+\include{Chapters/Chapter4}
+\include{Chapters/Chapter5}
+
+%----------------------------------------------------------------------------------------
+%   THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+
+\include{Appendices/presupuestoProyecto}
+\include{Appendices/gpu}
+%\include{Appendices/AppendixC}
+
+%----------------------------------------------------------------------------------------
+%   BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\printbibliography[heading=bibintoc]
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

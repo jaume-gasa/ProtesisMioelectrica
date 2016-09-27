@@ -1,0 +1,70 @@
+\chapter{Conclusiones} % Main chapter title
+\label{Chapter5}
+
+\chapquote{En este capítulo se resumirá el alcance que ha tenido el proyecto. En el apartado \ref{sec:conclusiones} se hace una reflexión sobre los resultado obtenidos en \ref{sec:experimentación}. En el apartado \ref{sec:trabajo-futuro} se muestran algunas ideas que se han quedado por desarrollar o errores que se han podido por corregir.}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%        Conclusiones
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusiones}
+\label{sec:conclusiones}
+
+Se ha logrado desarrollar un modelo de red neuronal artificial que resuelve el problema de clasificación con una precisión ligeramente superior al 60\%. En el apartado \ref{subs:resultados} del capítulo \ref{Chapter4} se puede comprobar gráficamente el rendimiento de las predicciones.
+
+El resultado, aunque no es perfecto ni es el que se esperaba obtener, es satisfactorio puesto que el desarrollo de 
+un proyecto de estas características requiere que cada etapa del mismo, sea realizada con precisión y de forma 
+robusta, es decir, tanto la etapa de obtención del conjunto de trabajos y la etapa de clasificación requieren una 
+atención y un desarrollo mayor del que se le ha podido dar en este trabajo principalmente por límites de tiempo y 
+por la complejidad del estudio de las áreas de la ingeniería de datos y el aprendizaje automático respectivamente.
+
+Por otra parte, se ha conseguido una prótesis como parte del entorno de pruebas para el algoritmo desarrollado 
+dentro de un presupuesto ajustado (anexo \ref{presupuestoProyecto}, que debido al rendimiento del algoritmo y el 
+tiempo dedicado al desarrollo del mismo, solo se ha podido hacer pruebas básicas con los motores.
+
+Puesto que en general, el desarrollo y los resultados han sido satisfactorios teniendo en cuenta las limitaciones 
+anteriores, se espera seguir desarrollando este trabajo como Proyecto Final en el Máster de Automática y Robótica 
+con el fin de perfeccionar el trabajo realizado hasta ahora y conseguir mejores resultados respecto al 
+funcionamiento del algoritmo de clasificación.
+
+En el siguiente apartado (\ref{sec:trabajo-futuro}) se deja constancia de las principales ideas que se han quedado fuera de este trabajo.
+
+
+%Por ello, y como se menciona en el siguiente apartado, para mejorar el resultado es necesario primero construir un conjunto de datos más robusto y balanceado. Una vez solventado este problema, el proceso de experimentación podría dar lugar a distintas configuraciones de parámetros que darían lugar a un modelo más robusto, pudiendo hacer uso de las mismas herramientas usadas y desarrolladas en este trabajo. En el apartado \ref{sec:trabajo-futuro} se incluyen consejos sobre técnicas que no se han podido probar para la búsqueda óptima de parámetros para las redes neuronales.
+
+%Con los resultados mostrados y sus reflexiones, se ha logrado dejar constancia del largo proceso que supone no solo 
+%el desarrollo de \textit{software} para realizar tareas de clasificación sino también la de construir tu propio 
+%conjunto de datos \dots
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%        Trabajo futuro
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Trabajo futuro}
+\label{sec:trabajo-futuro}
+
+Con el fin de mejorar los resultados obtenidos en este trabajo y debido a limitaciones de tiempo, estas son algunas ideas y pruebas que se pueden realizar.
+
+Al tratarse de un conjunto de datos propio, es decir, uno que se ha creado para este propósito y no un conjunto que se encuentran en la mayoría de artículos \cite{krizhevsky2009learning, lecun1998mnist, netzer2011reading}, es posible que no se pueda obtener una tasa de aciertos perfecta (u óptima) por ello se han de aplicar técnicas de ingeniería de datos para demostrar si es posible conseguir una mejora o no. Aumentar el tamaño del conjunto de datos y conseguir que el dicho conjunto esté balanceado deberían ser las primeras mejoras que implementar.
+
+
+Alternativas al \textit{grid search} para encontrar los mejores parámetros con el que entrenar las redes neuronales.
+\textit{Grid search} realiza una búsqueda mediante fuerza bruta para encontrar los parámetros que consigan los 
+mejores resultados, con miles de posibles parámetros que pueden aprenderse, el tiempo de entrenar modelos mediante 
+esta búsqueda y con equipos de bajo rendimiento tiende a ser impracticable. Algunas alternativas a esta situación 
+sería el uso de \textit{random search} o \textit{bayesian optimizations}.
+
+
+

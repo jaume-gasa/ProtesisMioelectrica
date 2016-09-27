@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Desarrollo de prótesis robóticas mediante sistemas empotrados y tecnologías de impresión 3D</title>
+
+		<meta name="description" content="Presentación del trabajo de fin de grado.">
+		<meta name="author" content="Jaume Gasa Gómez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<style media="screen">
+			.half{
+				width: 50%;
+				float: left;
+			}
+			.opencv-img{
+				width: 68%;
+				height: auto;
+			}
+			.bigcode{
+				height:100%;
+			}
+			.bigcode .big{
+				height: 100%;
+			}
+
+			.bigcode pre{
+				height: 78%;
+			}
+
+			.smallfont{
+				max-height: none !important;
+				height: 100%;
+				font-size: 17px !important;
+				line-height: 22px !important;
+			}
+		</style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Desarrollo de prótesis robóticas mediante sistemas empotrados y tecnologías de impresión 3D</h3>
+					<p>Jaume Gasa Gómez</p>
+					<p><small> <em>jgg94@alu.ua.es</em> </small></p>
+				</section>
+
+				<section>
+					<h2>Índice</h2>
+					<ol>
+						<li>Introducción</li>
+						<li>Obtención de datos</li>
+						<li>Clasificación de señales EMG</li>
+						<li>Conclusiones</li>
+					</ol>
+				</section>
+
+				<section>
+						<h4>Introducción</h4>
+						<h2> Motivación </h2>
+						<p class="fragment">Ampliar mis conocimientos sobre
+						<br>
+						<em>hardware</em> y la inteligencia artificial.</p>
+						<p class="fragment">Impacto social.</p>
+				</section>
+
+				<section>
+					<h3>Prótesis Dextrus</h3>
+					<img src="./Images/palma.jpg"  height=auto width="750">
+
+					<aside class="notes">
+						<ul>
+							<li>Desarrollada por la startup OpenBionics (anterior. Open Hand Project) incubada en Laboratorio de Robótica de Bristol</li>
+							<li>Licencia creative commons, compartir de igual a igual y atribución.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Demo</h3>
+					<video controls muted="true">
+						<source src="https://b2aeaa58a57a200320db-8b65b95250e902c437b256b5abf3eac7.ssl.cf5.rackcdn.com/media_entries/10976/YDXJ0516.medium.webm">
+					</video>
+				</section>
+
+				<section>
+					<h2> Obtención de datos</h2>
+					<p class="fragment">Determinar qué señales EMG corresponden a qué posición del dedo.</p>
+				</section>
+
+				<section>
+					<h3>Myo Armband y OpenCV</h3>
+					<div class="half">
+						<img src="./Images/myo.png" alt=""  />
+					</div>
+					<div class="half">
+						<img class="opencv-img" src="./Images/opencv.png" alt=""/>
+					</div>
+
+					<aside class="notes">
+						<ul>
+							<li>Thalmic Labs. 8 sensores EMG. Uso de librería externa Myo Raw</li>
+							<li>Desarrollado inicialmente por Intel. Visión artificial en tiempo real. Licencia BSD</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Captura de la posición del dedo</h3>
+					<video controls>
+						<source src="https://b2aeaa58a57a200320db-8b65b95250e902c437b256b5abf3eac7.ssl.cf5.rackcdn.com/media_entries/11006/data-recorder-demo.medium.webm">
+					</video>
+				</section>
+
+				<section>
+					<h3>Funcionamiento del programa</h3>
+					<img src="./Images/finger-length-3.png"  height=auto width="750">
+
+				</section>
+
+				<section>
+					<h2>Clasificación señales emg</h2>
+					<p class="fragment">Redes neuronales artificiales.</p>
+					<p class="fragment">Modelo desarrollado.</p>
+				</section>
+
+				<section>
+					<h3>Redes neuronales artificiales</h3>
+					<img src="./Images/neural-net.png" alt="" />
+
+					<aside class="notes">
+						<ul>
+							<li>Aproximar una función para que dadas unas entradas nos devuelva la salida que queremos</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section class="bigcode">
+					<h3>Modelo desarrollado con Nolearn</h3>
+					<div class="half">
+						<pre><code class="python" data-trim>
+def build_nn():
+  num_features = 8
+  num_classes = 6
+
+  layers = [
+  # 5 layers: 3 hidden layers
+  ('input', InputLayer),
+  ('dense0', DenseLayer),
+  ('dropout0', DropoutLayer),
+  ('dense1', DenseLayer),
+  ('dropout1', DropoutLayer),
+  ('dense2', DenseLayer),
+  ('dropout2', DropoutLayer),
+  ('output', DenseLayer)]
+					</code></pre>
+					</div>
+
+					<div class="half big">
+						<pre><code class="python smallfont" data-trim>
+# layer parameters:
+  net = NeuralNet(layers=layers,
+  # Input
+  input_shape=(None, num_features),
+  # Dense0
+  dense0_nonlinearity=rectify,
+  dense0_num_units=1200,
+  dropout0_p=0.4,
+  # Dense1
+  dense1_nonlinearity=rectify,
+  dense1_num_units=1200,
+  dropout1_p=0.4,
+  # Dense2
+  dense2_num_units=1200,
+  dense2_nonlinearity=rectify,
+  dropout2_p=0.4,
+  # Output
+  output_num_units=num_classes,
+  output_nonlinearity=softmax,
+  update= nesterov_momentum,
+  update_learning_rate=0.001,
+  update_momentum=0.9,
+  train_split=TrainSplit(eval_size=0.1),
+  max_epochs=500)
+
+						</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h3>Precisión durante el entrenamiento</h3>
+					<video controls>
+						<source src="./Videos/acc.mp4">
+						</video>
+					</section>
+
+				<section>
+					<h2>Resultados</h2>
+				</section>
+
+				<section>
+					<h3>Informe de clasificación</h3>
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>Precisión</th>
+								<th>Exhaustividad</th>
+								<th>Valor-F</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>class 0</td>
+								<td>0.57</td>
+								<td>0.66</td>
+								<td>0.61</td>
+							</tr>
+							<tr>
+								<td>class 1</td>
+								<td>0.80</td>
+								<td>0.64</td>
+								<td>0.71</td>
+							</tr>
+							<tr>
+								<td>class 2</td>
+								<td>0.55</td>
+								<td>0.63</td>
+								<td>0.59</td>
+							</tr>
+							<tr>
+								<td>class 3</td>
+								<td>0.61</td>
+								<td>0.54</td>
+								<td>0.58</td>
+							</tr>
+							<tr>
+								<td>class 4</td>
+								<td>0.65</td>
+								<td>0.46</td>
+								<td>0.54</td>
+							</tr>
+							<tr>
+								<td>class 5</td>
+								<td>0.55</td>
+								<td>0.73</td>
+								<td>0.63</td>
+							</tr>
+							<tr>
+								<td><b>Promedio</b></td>
+								<td>0.62</td>
+								<td>0.61</td>
+								<td>0.61</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</section>
+
+				<section>
+					<h3>Matriz de confusión</h3>
+					<img src="./Images/matriz-confusion2.png" width=auto height="480" />
+				</section>
+
+				<section>
+					<h2>Conclusiones</h2>
+					<p class="fragment">Ahondar en las fase de obtención de datos y el proceso de aprendizaje.</p>
+				</section>
+
+				<section>
+					<h3>Desarrollo de prótesis robóticas mediante sistemas empotrados y tecnologías de impresión 3D</h3>
+					<p>Jaume Gasa Gómez</p>
+					<p><small> <em>jgg94@alu.ua.es</em> </small></p>
+				</section>
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
